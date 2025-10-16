@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReSTerAvecMoi.Generics;
 
-public abstract class CrudEntityBase<TKey>
+public abstract partial class CrudEntityBase<TKey>
 where TKey : IComparable<TKey>, IEquatable<TKey>
 {
     [Key]
