@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReSTerAvecMoi.Generics;
 
-public class CrudEntityBase<TKey>
-where TKey : IComparable<TKey>, IQueryable<TKey>
+public abstract class CrudEntityBase<TKey>
+where TKey : IComparable<TKey>, IEquatable<TKey>
 {
     [Key]
     public virtual TKey Id { get; init; }
@@ -14,4 +14,10 @@ where TKey : IComparable<TKey>, IQueryable<TKey>
     
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTimeOffset? UpdatedAt { get; set; }
+
+    public bool Diff(CrudEntityBase<TKey> other)
+    {
+        // TODO: COMPLETE THIS
+        return true;
+    }
 }
