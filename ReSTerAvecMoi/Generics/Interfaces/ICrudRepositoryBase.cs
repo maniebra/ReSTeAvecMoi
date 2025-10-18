@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace ReSTerAvecMoi.Generics.Interfaces;
 
 public interface ICrudRepositoryBase<in TKey, TEntity>
@@ -10,4 +12,5 @@ where TEntity : CrudEntityBase<TKey>
     public Task Delete(TKey id);
     public Task<TEntity> Get(TKey id);
     public Task<List<TEntity>> GetAll();
+    public Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
 }

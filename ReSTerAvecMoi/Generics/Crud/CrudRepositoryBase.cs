@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using ReSTerAvecMoi.Exceptions;
 using ReSTerAvecMoi.Generics.Interfaces;
@@ -51,5 +52,11 @@ public class CrudRepositoryBase<TKey, TEntity>(DbContext context) : ICrudReposit
     public async Task<List<TEntity>> GetAll()
     {
         return await _dbSet.ToListAsync();
+    }
+
+    public async Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
+    {
+        var entities = await _dbSet.Where(predicate).ToListAsync();
+        return entities;
     }
 }
