@@ -14,7 +14,7 @@ public abstract class CrudRepositoryBase<TKey, TEntity>(DbContext context) : ICr
 
     public async Task<TEntity> Create(TEntity entity)
     {
-        await _dbSet.AddAsync(entity);
+        _dbSet.Add(entity);
         await _context.SaveChangesAsync();
         return entity;
     }
