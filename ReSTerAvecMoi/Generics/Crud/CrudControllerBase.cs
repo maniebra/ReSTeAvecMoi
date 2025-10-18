@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReSTerAvecMoi.Exceptions;
 using ReSTerAvecMoi.Generics.Interfaces;
 
-namespace ReSTerAvecMoi.Generics;
+namespace ReSTerAvecMoi.Generics.Crud;
 
 public class CrudControllerBase<TKey, TEntity, TIRepository, TIService, TReadDto, TModifyDto>(TIService service)
     : ControllerBase

@@ -1,6 +1,7 @@
+using System.Linq.Expressions;
 using ReSTerAvecMoi.Generics.Interfaces;
 
-namespace ReSTerAvecMoi.Generics;
+namespace ReSTerAvecMoi.Generics.Crud;
 
 public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repository)
     : ICrudServiceBase<TKey, TEntity, TIRepository>
@@ -33,6 +34,32 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         catch (Exception e)
         {
             return Result<List<TEntity>>.Failure(e);
+        }
+    }
+
+    public async Task<Result<List<TEntity>>> FindAll(Expression<Func<TEntity, bool>> predicate)
+    {
+        try
+        {
+            var res = await _repository.FindAll(predicate);
+            return Result<List<TEntity>>.Success(res);
+        }
+        catch (Exception e)
+        {
+            return Result<List<TEntity>>.Failure(e);
+        }
+    }
+
+    public async Task<Result<TEntity?>> FindOne(Expression<Func<TEntity, bool>> predicate)
+    {
+        try
+        {
+            var res = await _repository.FindOne(predicate);
+            return Result<TEntity?>.Success(res);
+        }
+        catch (Exception e)
+        {
+            return Result<TEntity?>.Failure(e);
         }
     }
 

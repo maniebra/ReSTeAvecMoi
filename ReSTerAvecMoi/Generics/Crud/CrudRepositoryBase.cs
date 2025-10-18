@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using ReSTerAvecMoi.Exceptions;
 using ReSTerAvecMoi.Generics.Interfaces;
 
-namespace ReSTerAvecMoi.Generics;
+namespace ReSTerAvecMoi.Generics.Crud;
 
-public class CrudRepositoryBase<TKey, TEntity>(DbContext context) : ICrudRepositoryBase<TKey, TEntity>
+public abstract class CrudRepositoryBase<TKey, TEntity>(DbContext context) : ICrudRepositoryBase<TKey, TEntity>
     where TKey : IComparable<TKey>, IEquatable<TKey>
     where TEntity : CrudEntityBase<TKey>
 {
@@ -54,7 +54,12 @@ public class CrudRepositoryBase<TKey, TEntity>(DbContext context) : ICrudReposit
         return await _dbSet.ToListAsync();
     }
 
-    public async Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
+    public async Task<TEntity?> FindOne(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await _dbSet.Where(predicate).SingleOrDefaultAsync();
+    }
+
+    public async Task<List<TEntity>> FindAll(Expression<Func<TEntity, bool>> predicate)
     {
         var entities = await _dbSet.Where(predicate).ToListAsync();
         return entities;

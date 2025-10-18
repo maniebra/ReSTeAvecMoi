@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using ReSTerAvecMoi.Generics.Crud;
 
 namespace ReSTerAvecMoi.Generics.Interfaces;
 
@@ -12,5 +13,6 @@ where TEntity : CrudEntityBase<TKey>
     public Task Delete(TKey id);
     public Task<TEntity> Get(TKey id);
     public Task<List<TEntity>> GetAll();
-    public Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
+    public Task<TEntity?> FindOne(Expression<Func<TEntity, bool>> predicate);
+    public Task<List<TEntity>> FindAll(Expression<Func<TEntity, bool>> predicate);
 }
