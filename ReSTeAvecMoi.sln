@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReSTerAvecMoi", "ReSTerAvecMoi\ReSTerAvecMoi.csproj", "{85777107-C38E-4FFB-84D6-A5FF4FEC174E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReSTeAvecMoi", "ReSTeAvecMoi\ReSTeAvecMoi.csproj", "{85777107-C38E-4FFB-84D6-A5FF4FEC174E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

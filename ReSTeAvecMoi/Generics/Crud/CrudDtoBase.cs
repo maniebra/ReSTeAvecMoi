@@ -1,4 +1,4 @@
-namespace ReSTerAvecMoi.Generics.Crud;
+namespace ReSTeAvecMoi.Generics.Crud;
 
 /// <summary>
 /// Base class for all Data Transfer Objects (DTOs) that wrap entities.

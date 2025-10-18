@@ -1,4 +1,4 @@
-namespace ReSTerAvecMoi.Generics;
+namespace ReSTeAvecMoi.Generics;
 
 /// <summary>
 /// A wrapper object used to handle errors. Use as your functions' return types.

@@ -1,8 +1,8 @@
-using ReSTerAvecMoi.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using ReSTeAvecMoi.Attributes;
 
-namespace ReSTerAvecMoi.Extensions;
+namespace ReSTeAvecMoi.Extensions;
 
 public static class ServiceCollectionExtensions
 {

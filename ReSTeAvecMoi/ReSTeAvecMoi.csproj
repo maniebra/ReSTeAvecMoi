@@ -4,7 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
         <ImplicitUsings>enable</ImplicitUsings>
-        <PackageId>ReSTerAvecMoi</PackageId>
+        <PackageId>ReSTeAvecMoi</PackageId>
         <Version>1.0.0</Version>
         <Authors>Mani Ebrahimi</Authors>
         <PackageTags>utility;helpers;restapi;web;webmvc</PackageTags>

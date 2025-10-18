@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using ReSTerAvecMoi.Exceptions;
-using ReSTerAvecMoi.Generics.Interfaces;
+using ReSTeAvecMoi.Exceptions;
+using ReSTeAvecMoi.Generics.Interfaces;
 
-namespace ReSTerAvecMoi.Generics.Crud;
+namespace ReSTeAvecMoi.Generics.Crud;
 
 public abstract class CrudRepositoryBase<TKey, TEntity>(DbContext context) : ICrudRepositoryBase<TKey, TEntity>
     where TKey : IComparable<TKey>, IEquatable<TKey>

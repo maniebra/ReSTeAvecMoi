@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
-using ReSTerAvecMoi.Generics.Crud;
+using ReSTeAvecMoi.Generics.Crud;
 
-namespace ReSTerAvecMoi.Generics.Interfaces;
+namespace ReSTeAvecMoi.Generics.Interfaces;
 
 public interface ICrudRepositoryBase<in TKey, TEntity>
 where TKey : IEquatable<TKey>, IComparable<TKey>

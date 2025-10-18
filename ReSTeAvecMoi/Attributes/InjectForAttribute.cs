@@ -1,4 +1,4 @@
-namespace ReSTerAvecMoi.Attributes;
+namespace ReSTeAvecMoi.Attributes;
 
 [AttributeUsage(AttributeTargets.Class, Inherited =false)]
 public class InjectForAttribute(Type interfaceType) : Attribute

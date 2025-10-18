@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
-using ReSTerAvecMoi.Generics.Interfaces;
+using ReSTeAvecMoi.Generics.Interfaces;
 
-namespace ReSTerAvecMoi.Generics.Crud;
+namespace ReSTeAvecMoi.Generics.Crud;
 
 public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repository)
     : ICrudServiceBase<TKey, TEntity, TIRepository>

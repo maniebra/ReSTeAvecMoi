@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ReSTerAvecMoi.Generics.Crud;
+namespace ReSTeAvecMoi.Generics.Crud;
 
 public abstract partial class CrudEntityBase<TKey>
 where TKey : IComparable<TKey>, IEquatable<TKey>
