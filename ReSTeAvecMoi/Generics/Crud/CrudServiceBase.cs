@@ -1,14 +1,17 @@
 using System.Linq.Expressions;
 using ReSTeAvecMoi.Generics.Interfaces;
+using Serilog;
 
 namespace ReSTeAvecMoi.Generics.Crud;
 
-public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repository)
+public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repository, ILogger logger)
     : ICrudServiceBase<TKey, TEntity, TIRepository>
     where TKey : IEquatable<TKey>, IComparable, IComparable<TKey>
     where TEntity : CrudEntityBase<TKey>
     where TIRepository : CrudRepositoryBase<TKey, TEntity>
 {
+    
+    private readonly ILogger _logger = logger;
     private readonly TIRepository _repository = repository;
 
     public async Task<Result<TEntity?>> Get(TKey id)
@@ -20,6 +23,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         }
         catch (Exception e)
         {
+            _logger.Error(e, "Failed to get entity");
             return Result<TEntity?>.Failure(e);
         }
     }
@@ -33,6 +37,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         }
         catch (Exception e)
         {
+            _logger.Error(e, "Failed to get entities");
             return Result<List<TEntity>>.Failure(e);
         }
     }
@@ -46,6 +51,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         }
         catch (Exception e)
         {
+            _logger.Error(e, "Failed to find all matching entities");
             return Result<List<TEntity>>.Failure(e);
         }
     }
@@ -59,6 +65,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         }
         catch (Exception e)
         {
+            _logger.Error(e, "Failed to find a matching entity");
             return Result<TEntity?>.Failure(e);
         }
     }
@@ -72,6 +79,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         }
         catch (Exception e)
         {
+            _logger.Error(e, "Failed to create entity");
             return Result<TEntity>.Failure(e);
         }
     }
@@ -85,6 +93,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         }
         catch (Exception e)
         {
+            _logger.Error(e, "Failed to update entity");
             return Result<TEntity>.Failure(e);
         }
     }
@@ -98,6 +107,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
         }
         catch (Exception e)
         {
+            _logger.Error(e, "Failed to delete entity");
             return Result<TKey>.Failure(e);
         }
     }
