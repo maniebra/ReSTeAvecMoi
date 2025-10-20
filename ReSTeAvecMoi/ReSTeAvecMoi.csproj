@@ -8,7 +8,7 @@
         <Version>1.0.1</Version>
         <Authors>Mani Ebrahimi</Authors>
         <PackageTags>utility;helpers;restapi;web;webmvc</PackageTags>
-        <RepositoryUrl>https://github.com/maniebra/ReSTerAvecMoi</RepositoryUrl>
+        <RepositoryUrl>https://github.com/maniebra/ReSTeAvecMoi</RepositoryUrl>
         <Nullable>enable</Nullable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
@@ -26,10 +26,6 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Serilog" Version="4.3.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Filters\" />
     </ItemGroup>
 
 </Project>
