@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using ReSTeAvecMoi.Generics.Crud;
 
 namespace ReSTeAvecMoi.RulesValidator;
@@ -8,7 +6,7 @@ public abstract class RulesChain<TKey, TEntity>
     where TKey : IEquatable<TKey>, IComparable<TKey>
     where TEntity : CrudEntityBase<TKey>
 {
-    public List<string> Reasons = [];
+    public readonly List<string> Reasons = [];
     private readonly List<Rule<TKey, TEntity>> _rules = [];
 
     protected RulesChain(Rule<TKey, TEntity>? rule)
@@ -25,10 +23,21 @@ public abstract class RulesChain<TKey, TEntity>
 
     public bool Check(TEntity entity, bool stopOnFirstFailure = false)
     {
-        return _rules
-            .Select(rule => rule.RuleExpression.Compile())
-            .Select(compiledRule => compiledRule(entity))
-            .Where(result => !result)
-            .All(result => !stopOnFirstFailure);
+        foreach (var rule in from rule in _rules
+                 let compiledRule= rule.RuleExpression.Compile()
+                 let result = compiledRule(entity)
+                 where !result
+                 select rule)
+        {
+            if (stopOnFirstFailure)
+            {
+                Reasons.Add(rule.Message ?? "Rule Failed");
+                return false;
+            }
+
+            Reasons.Add(rule.Message ?? "Rule Failed");
+        }
+
+        return Reasons.Count <= 0;
     }
 }
