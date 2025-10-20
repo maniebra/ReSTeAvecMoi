@@ -8,7 +8,7 @@ public class CrudServiceBase<TKey, TEntity, TIRepository>(TIRepository repositor
     : ICrudServiceBase<TKey, TEntity, TIRepository>
     where TKey : IEquatable<TKey>, IComparable, IComparable<TKey>
     where TEntity : CrudEntityBase<TKey>
-    where TIRepository : CrudRepositoryBase<TKey, TEntity>
+    where TIRepository : ICrudRepositoryBase<TKey, TEntity>
 {
     
     private readonly ILogger _logger = logger;

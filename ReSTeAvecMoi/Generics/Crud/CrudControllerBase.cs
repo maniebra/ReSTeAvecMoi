@@ -1,19 +1,21 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ReSTeAvecMoi.Exceptions;
 using ReSTeAvecMoi.Generics.Interfaces;
 
 namespace ReSTeAvecMoi.Generics.Crud;
 
-public class CrudControllerBase<TKey, TEntity, TIRepository, TIService, TReadDto, TModifyDto>(TIService service)
+public class CrudControllerBase<TKey, TEntity, TIRepository, TIService, TReadDto, TModifyDto>(TIService service, IMapper mapper)
     : ControllerBase
     where TKey : IComparable<TKey>, IEquatable<TKey>
     where TEntity : CrudEntityBase<TKey>
     where TIRepository : ICrudRepositoryBase<TKey, TEntity>
     where TIService : ICrudServiceBase<TKey, TEntity, TIRepository>
-    where TReadDto : CrudReadDtoBase<TKey, TEntity>, new()
-    where TModifyDto : CrudModifyDtoBase<TKey, TEntity>
+    where TReadDto : CrudDtoBase<TKey, TEntity>, new()
+    where TModifyDto : CrudDtoBase<TKey, TEntity>
 {
     private readonly TIService _service = service;
+    private readonly IMapper _mapper = mapper;
 
 
     [HttpPost]
@@ -21,7 +23,7 @@ public class CrudControllerBase<TKey, TEntity, TIRepository, TIService, TReadDto
     [ProducesResponseType(400)]
     public async Task<IActionResult> Create([FromBody] TModifyDto modifyDto)
     {
-        var entity = modifyDto.ToEntity();
+        var entity = _mapper.Map<TEntity>(modifyDto);
         var res = await _service.Create(entity);
         if (res.IsSuccess)
             return Ok($"new {nameof(TEntity)} was created");
@@ -37,7 +39,7 @@ public class CrudControllerBase<TKey, TEntity, TIRepository, TIService, TReadDto
             return StatusCode(499);
         return Ok(
             res.Value?
-                .Select(m => (TReadDto)Activator.CreateInstance(typeof(TReadDto), m)!)
+                .Select(_mapper.Map<TEntity>)
                 .ToList());
     }
 
@@ -48,7 +50,7 @@ public class CrudControllerBase<TKey, TEntity, TIRepository, TIService, TReadDto
     {
         var res = await _service.Get(id);
         if (res.IsSuccess)
-            return Ok(res.Value);
+            return Ok(_mapper.Map<TReadDto>(res.Value));
         return res.Error switch
         {
             EntityNotFoundException<TEntity> => NotFound(id),
@@ -64,12 +66,13 @@ public class CrudControllerBase<TKey, TEntity, TIRepository, TIService, TReadDto
         [FromBody] TModifyDto modifyDto
         )
     {
-        var res = await _service.Update(modifyDto.ToEntity());
+        var entity = _mapper.Map<TEntity>(modifyDto);
+        var res = await _service.Update(entity);
         if (!res.IsSuccess)
             return BadRequest(res.ErrorMessage);
         if (res.Value == null)
             return StatusCode(400);
-        return Ok((TReadDto)Activator.CreateInstance(typeof(TReadDto), res.Value)!);
+        return Ok((TReadDto)Activator.CreateInstance(typeof(TReadDto), _mapper.Map<TReadDto>(res.Value))!);
     }
 
     [HttpDelete("{id}")]
