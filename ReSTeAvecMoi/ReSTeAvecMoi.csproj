@@ -5,12 +5,13 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageId>ReSTeAvecMoi</PackageId>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <Authors>Mani Ebrahimi</Authors>
         <PackageTags>utility;helpers;restapi;web;webmvc</PackageTags>
         <RepositoryUrl>https://github.com/maniebra/ReSTeAvecMoi</RepositoryUrl>
         <Nullable>enable</Nullable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Title>ReSTe Avec Moi</Title>
     </PropertyGroup>
 
     <ItemGroup>
